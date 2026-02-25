@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSL Puzzle Master</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="game-container">
+        <h1>নম্বর পাজল</h1>
+        <div class="stats-bar">
+            <p>চাল (Moves): <span id="moveCount">0</span></p>
+            <p>লেভেল: <span id="levelDisplay">1</span></p>
+        </div>
+
+        <div id="puzzleBoard" class="puzzle-board"></div>
+
+        <p id="message"></p>
+        <button id="shuffleBtn">নতুন করে সাজান</button>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
