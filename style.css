@@ -1,0 +1,15 @@
+:root{--bg-color:#0f172a;--card-bg:#1e293b}
+body{background-color:var(--bg-color);color:white;font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;overflow:hidden}
+.game-wrapper{text-align:center;background:var(--card-bg);padding:20px;border-radius:20px;width:340px}
+.info-container{display:flex;justify-content:space-between;margin-bottom:15px;padding:10px;background:#0f172a;border-radius:10px}
+#grid,.grid{width:320px;height:320px;display:grid;grid-template-columns:repeat(8,1fr);gap:2px;background:#334155;padding:5px;border-radius:10px;margin:0 auto}
+#grid div{width:38px;height:38px;border-radius:5px;cursor:pointer}
+.candy-0{background:radial-gradient(circle,#ff5f6d,#ffc371);border-radius:50%}
+.candy-1{background:radial-gradient(circle,#2193b0,#6dd5ed);border-radius:5px}
+.candy-2{background:radial-gradient(circle,#11998e,#38ef7d);border-radius:20%}
+.candy-3{background:radial-gradient(circle,#FDC830,#F37335);clip-path:polygon(50% 0%,0% 100%,100% 100%)}
+.candy-4{background:radial-gradient(circle,#8E2DE2,#4A00E0);border-radius:50% 0 50% 0}
+#watchAdBtn,#resetBtn,#spinWheelBtn{padding:10px;margin-top:10px;width:100%;border:none;border-radius:10px;cursor:pointer}
+#watchAdBtn{background:linear-gradient(45deg,#f59e0b,#d97706);color:white;font-weight:bold}
+#resetBtn{background:#3b82f6;color:white;font-weight:bold}
+#spinWheelBtn{background:#f43f5e;color:white;font-weight:bold}

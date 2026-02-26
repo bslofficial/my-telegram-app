@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BSL Candy Match</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://sad.adsgram.ai/js/adsgram-ad-sdk.js"></script>
+</head>
+<body>
+<div class="game-wrapper">
+  <h2 id="title">BSL Candy Match</h2>
+  <div class="info-container">
+    <div class="score-box">স্কোর: <span id="score">0</span></div>
+    <div class="timer-box">সময়: <span id="timer">60</span>s</div>
+  </div>
+  <button id="watchAdBtn">📺 বিজ্ঞাপন দেখে +৫০০ পয়েন্ট নিন</button>
+  <div id="grid" class="grid"></div>
+  <button id="spinWheelBtn">🎡 Spin Wheel</button>
+  <button id="resetBtn">নতুন গেম</button>
+</div>
+<script type="module" src="firebase.js"></script>
+<script src="spinwheel.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

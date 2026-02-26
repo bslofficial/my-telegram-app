@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "leaderboard": { ".read": true, ".write": "auth != null" },
+    "withdraw": { ".read": "auth != null && root.child('admins').child(auth.uid).exists()", ".write": "auth != null && root.child('admins').child(auth.uid).exists()" },
+    "dailyRewards": { "$uid": { ".read": "auth != null && auth.uid === $uid", ".write": "auth != null && auth.uid === $uid" } },
+    "admins": { ".read": false, ".write": false }
+  }
+}
