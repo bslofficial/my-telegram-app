@@ -1,50 +1,96 @@
 const tg = window.Telegram.WebApp;
 tg.expand();
 
-let tiles = [1, 2, 3, 4, 5, 6, 7, 8, null]; // null মানে খালি ঘর
-let moves = 0;
-const board = document.getElementById('puzzleBoard');
+const grid = document.querySelector('#grid');
+const scoreDisplay = document.querySelector('#score');
+const width = 8;
+const squares = [];
+let score = 0;
 
-function renderBoard() {
-    board.innerHTML = '';
-    tiles.forEach((tile, index) => {
-        const div = document.createElement('div');
-        div.className = tile ? 'tile' : 'tile empty';
-        div.textContent = tile || '';
-        div.onclick = () => moveTile(index);
-        board.appendChild(div);
-    });
+let selectedSquareId;
+let targetSquareId;
+
+// ক্যান্ডি বোর্ড তৈরি
+function createBoard() {
+    for (let i = 0; i < width * width; i++) {
+        const square = document.createElement('div');
+        let randomColor = Math.floor(Math.random() * 5);
+        square.classList.add(`candy-${randomColor}`);
+        square.setAttribute('id', i);
+        
+        // টাচ ইভেন্ট (মোবাইলের জন্য)
+        square.addEventListener('touchstart', (e) => {
+            selectedSquareId = parseInt(e.target.id);
+        });
+        
+        square.addEventListener('touchend', (e) => {
+            let touch = e.changedTouches[0];
+            let targetElem = document.elementFromPoint(touch.clientX, touch.clientY);
+            if (targetElem && targetElem.parentNode === grid) {
+                targetSquareId = parseInt(targetElem.id);
+                moveCandies();
+            }
+        });
+
+        grid.appendChild(square);
+        squares.push(square);
+    }
 }
+createBoard();
 
-function moveTile(index) {
-    const emptyIndex = tiles.indexOf(null);
-    const validMoves = [index - 1, index + 1, index - 3, index + 3];
+// ক্যান্ডি অদলবদল করা
+function moveCandies() {
+    const validMoves = [
+        selectedSquareId - 1,
+        selectedSquareId - width,
+        selectedSquareId + 1,
+        selectedSquareId + width
+    ];
 
-    if (validMoves.includes(emptyIndex)) {
-        // পাশাপাশি বা উপরে-নিচে খালি ঘর থাকলে অদলবদল হবে
-        [tiles[index], tiles[emptyIndex]] = [tiles[emptyIndex], tiles[index]];
-        moves++;
-        document.getElementById('moveCount').textContent = moves;
-        renderBoard();
-        checkWin();
+    if (validMoves.includes(targetSquareId)) {
+        let selectedColor = squares[selectedSquareId].className;
+        let targetColor = squares[targetSquareId].className;
+        
+        squares[selectedSquareId].className = targetColor;
+        squares[targetSquareId].className = selectedColor;
+        
+        // বদলানোর পর সাথে সাথে চেক করা
+        checkMatches();
     }
 }
 
-function checkWin() {
-    const winPattern = [1, 2, 3, 4, 5, 6, 7, 8, null];
-    if (JSON.stringify(tiles) === JSON.stringify(winPattern)) {
-        document.getElementById('message').textContent = "অভিনন্দন! আপনি জিতেছেন!";
-        tg.MainButton.setText("পরবর্তী লেভেল");
-        tg.MainButton.show();
+// ৩টি ক্যান্ডি ম্যাচিং চেক করা
+function checkMatches() {
+    // পাশাপাশি ৩টি (Row)
+    for (let i = 0; i < 62; i++) {
+        let rowOfThree = [i, i+1, i+2];
+        let decidedColor = squares[i].className;
+        if ((i + 1) % width !== 0 && (i + 2) % width !== 0 && decidedColor !== '') {
+            if (rowOfThree.every(index => squares[index].className === decidedColor)) {
+                score += 10;
+                scoreDisplay.innerHTML = score;
+                rowOfThree.forEach(index => {
+                    squares[index].className = 'candy-' + Math.floor(Math.random() * 5);
+                });
+            }
+        }
+    }
+
+    // উপরে-নিচে ৩টি (Column)
+    for (let i = 0; i < 47; i++) {
+        let columnOfThree = [i, i + width, i + width * 2];
+        let decidedColor = squares[i].className;
+        if (decidedColor !== '') {
+            if (columnOfThree.every(index => squares[index].className === decidedColor)) {
+                score += 10;
+                scoreDisplay.innerHTML = score;
+                columnOfThree.forEach(index => {
+                    squares[index].className = 'candy-' + Math.floor(Math.random() * 5);
+                });
+            }
+        }
     }
 }
 
-function shuffle() {
-    tiles.sort(() => Math.random() - 0.5);
-    moves = 0;
-    document.getElementById('moveCount').textContent = moves;
-    renderBoard();
-}
-
-document.getElementById('shuffleBtn').onclick = shuffle;
-shuffle();
+// অটোমেটিক চেক করা
+window.setInterval(checkMatches, 300);

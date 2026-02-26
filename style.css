@@ -1,55 +1,53 @@
+:root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+}
 body {
-    background-color: var(--tg-theme-bg-color, #f4f4f9);
-    color: var(--tg-theme-text-color, #222);
+    background-color: var(--bg-color);
+    color: white;
+    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
     margin: 0;
 }
-
-.game-container {
-    background: var(--tg-theme-secondary-bg-color, #fff);
+.game-wrapper {
+    text-align: center;
+    background: var(--card-bg);
     padding: 20px;
     border-radius: 20px;
-    text-align: center;
-    width: 90%;
-    max-width: 350px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
-
-.puzzle-board {
+.grid {
+    width: 320px;
+    height: 320px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin: 20px 0;
-    background: #bbb;
-    padding: 10px;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 2px;
+    background: #334155;
+    padding: 5px;
     border-radius: 10px;
 }
-
-.tile {
-    width: 100%;
-    aspect-ratio: 1/1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--tg-theme-button-color, #0088cc);
-    color: var(--tg-theme-button-text-color, #fff);
-    font-size: 24px;
-    font-weight: bold;
-    border-radius: 8px;
+.grid div {
+    width: 38px;
+    height: 38px;
+    border-radius: 5px;
     cursor: pointer;
-    user-select: none;
 }
+/* ক্যান্ডি কালার */
+.candy-0 { background: radial-gradient(circle, #ff5f6d, #ffc371); border-radius: 50%; }
+.candy-1 { background: radial-gradient(circle, #2193b0, #6dd5ed); border-radius: 5px; }
+.candy-2 { background: radial-gradient(circle, #11998e, #38ef7d); border-radius: 20%; }
+.candy-3 { background: radial-gradient(circle, #FDC830, #F37335); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+.candy-4 { background: radial-gradient(circle, #8E2DE2, #4A00E0); border-radius: 50% 0 50% 0; }
 
-.tile.empty {
-    background: #ddd;
-    cursor: default;
-}
-
-.stats-bar {
-    display: flex;
-    justify-content: space-between;
+#resetBtn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 50px;
     font-weight: bold;
-    margin-bottom: 10px;
 }
