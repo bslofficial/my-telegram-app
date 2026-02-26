@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>BSL Candy Match 🍬</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Telegram Web App -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- Firebase -->
+  <script type="module" src="firebase.js"></script>
+</head>
+<body>
+  <div class="game-wrapper">
+    <h2>BSL Candy Match 🍬</h2>
+    <div class="info-container">
+      <div>Score: <span id="score">0</span></div>
+      <div>Time: <span id="timer">60</span>s</div>
+    </div>
+
+    <button id="watchAdBtn">📺 Watch Ad +500</button>
+    <div id="grid" class="grid"></div>
+
+    <div class="buttons">
+      <button onclick="spinWheel()">Spin Wheel 🎡</button>
+      <button onclick="withdraw()">Withdraw 💰</button>
+      <button onclick="invite()">Invite & Earn 🔗</button>
+      <button onclick="location.reload()">New Game 🔄</button>
+    </div>
+  </div>
+
+  <!-- Game JS -->
+  <script type="module" src="game.js"></script>
+</body>
+</html>

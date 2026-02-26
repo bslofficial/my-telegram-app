@@ -1,0 +1,71 @@
+:root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.game-wrapper {
+    text-align: center;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 20px;
+    width: 340px;
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #0f172a;
+    border-radius: 10px;
+}
+
+.grid {
+    width: 320px;
+    height: 320px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 2px;
+    background: #334155;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.grid div {
+    width: 38px;
+    height: 38px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.candy-0 { background: #ff6b6b; }
+.candy-1 { background: #4ecdc4; }
+.candy-2 { background: #ffe66d; }
+.candy-3 { background: #5f27cd; }
+.candy-4 { background: #1dd1a1; }
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+}
+
+.buttons button {
+    margin-top: 5px;
+}
