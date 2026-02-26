@@ -2,6 +2,7 @@
     --bg-color: #0f172a;
     --card-bg: #1e293b;
 }
+
 body {
     background-color: var(--bg-color);
     color: white;
@@ -11,14 +12,29 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    overflow: hidden; /* স্ক্রিন যাতে না নড়ে */
 }
+
 .game-wrapper {
     text-align: center;
     background: var(--card-bg);
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    width: 340px;
 }
+
+/* স্কোর এবং টাইমার বক্সের স্টাইল */
+.info-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #0f172a;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
 .grid {
     width: 320px;
     height: 320px;
@@ -28,14 +44,22 @@ body {
     background: #334155;
     padding: 5px;
     border-radius: 10px;
+    margin: 0 auto;
 }
+
 .grid div {
     width: 38px;
     height: 38px;
     border-radius: 5px;
     cursor: pointer;
+    transition: transform 0.1s ease;
 }
-/* ক্যান্ডি কালার */
+
+.grid div:active {
+    transform: scale(0.9); /* টাচ করলে সামান্য ছোট হবে */
+}
+
+/* ক্যান্ডি ডিজাইন */
 .candy-0 { background: radial-gradient(circle, #ff5f6d, #ffc371); border-radius: 50%; }
 .candy-1 { background: radial-gradient(circle, #2193b0, #6dd5ed); border-radius: 5px; }
 .candy-2 { background: radial-gradient(circle, #11998e, #38ef7d); border-radius: 20%; }
@@ -44,10 +68,17 @@ body {
 
 #resetBtn {
     margin-top: 15px;
-    padding: 10px 20px;
+    padding: 10px 30px;
     background: #3b82f6;
     color: white;
     border: none;
     border-radius: 50px;
     font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px #2563eb;
+}
+
+#resetBtn:active {
+    box-shadow: none;
+    transform: translateY(2px);
 }

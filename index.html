@@ -6,14 +6,34 @@
     <title>BSL Candy Crush</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        /* টাইমারের জন্য বাড়তি স্টাইল */
+        .info-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <div class="game-wrapper">
         <h2 id="title">BSL Candy Match</h2>
-        <div class="score-container">স্কোর: <span id="score">0</span></div>
+        
+        <div class="info-container">
+            <div class="score-container">স্কোর: <span id="score">0</span></div>
+            <div class="timer-container">সময়: <span id="timer">60</span>s</div>
+        </div>
+
         <div class="grid" id="grid"></div>
         <button id="resetBtn" onclick="location.reload()">নতুন গেম</button>
     </div>
+
+    <audio id="matchSound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3" preload="auto"></audio>
+
     <script src="game.js"></script>
 </body>
 </html>

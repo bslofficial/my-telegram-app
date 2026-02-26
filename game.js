@@ -3,12 +3,17 @@ tg.expand();
 
 const grid = document.querySelector('#grid');
 const scoreDisplay = document.querySelector('#score');
+const timerDisplay = document.querySelector('#timer'); // টাইমার ডিসপ্লে
 const width = 8;
 const squares = [];
 let score = 0;
+let timeLeft = 60; // ৬০ সেকেন্ড সময়
 
 let selectedSquareId;
 let targetSquareId;
+
+// সাউন্ড ইফেক্ট লোড করা
+const matchSound = new Audio('https://www.soundjay.com/buttons/sounds/button-3.mp3');
 
 // ক্যান্ডি বোর্ড তৈরি
 function createBoard() {
@@ -18,7 +23,6 @@ function createBoard() {
         square.classList.add(`candy-${randomColor}`);
         square.setAttribute('id', i);
         
-        // টাচ ইভেন্ট (মোবাইলের জন্য)
         square.addEventListener('touchstart', (e) => {
             selectedSquareId = parseInt(e.target.id);
         });
@@ -54,13 +58,14 @@ function moveCandies() {
         squares[selectedSquareId].className = targetColor;
         squares[targetSquareId].className = selectedColor;
         
-        // বদলানোর পর সাথে সাথে চেক করা
         checkMatches();
     }
 }
 
 // ৩টি ক্যান্ডি ম্যাচিং চেক করা
 function checkMatches() {
+    let hasMatch = false;
+
     // পাশাপাশি ৩টি (Row)
     for (let i = 0; i < 62; i++) {
         let rowOfThree = [i, i+1, i+2];
@@ -69,6 +74,7 @@ function checkMatches() {
             if (rowOfThree.every(index => squares[index].className === decidedColor)) {
                 score += 10;
                 scoreDisplay.innerHTML = score;
+                hasMatch = true;
                 rowOfThree.forEach(index => {
                     squares[index].className = 'candy-' + Math.floor(Math.random() * 5);
                 });
@@ -84,13 +90,30 @@ function checkMatches() {
             if (columnOfThree.every(index => squares[index].className === decidedColor)) {
                 score += 10;
                 scoreDisplay.innerHTML = score;
+                hasMatch = true;
                 columnOfThree.forEach(index => {
                     squares[index].className = 'candy-' + Math.floor(Math.random() * 5);
                 });
             }
         }
     }
+
+    // যদি ম্যাচ হয় তবে শব্দ হবে
+    if (hasMatch) {
+        matchSound.play().catch(e => console.log("Sound error:", e));
+    }
 }
 
-// অটোমেটিক চেক করা
+// টাইমার ফাংশন
+const gameTimer = setInterval(() => {
+    timeLeft--;
+    if (timerDisplay) timerDisplay.innerHTML = timeLeft;
+    
+    if (timeLeft <= 0) {
+        clearInterval(gameTimer);
+        alert("সময় শেষ! আপনার চূড়ান্ত স্কোর: " + score);
+        location.reload(); 
+    }
+}, 1000);
+
 window.setInterval(checkMatches, 300);
